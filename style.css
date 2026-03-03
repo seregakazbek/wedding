@@ -319,29 +319,29 @@ nav a {
    АДАПТИВ ДЛЯ МОБИЛЬНЫХ
 ========================= */
 @media (max-width: 768px) {
-
-    /* Фон страницы — корректный размер без сильного растягивания */
     body {
-        background-size: contain;          /* заполняет экран */
-        background-position: center top; /* показываем верх фото (лица) */
-        background-attachment: scroll;   /* обязательно скроллится */
+        /* Отключаем фиксацию, которая ломает масштаб на iOS/Android */
+        background-attachment: scroll !important; 
+        
+        /* Растягиваем только по ширине, чтобы фото не увеличивалось в 10 раз */
+        background-size: 100% auto; 
+        
+        /* Прижимаем фото к верху, чтобы лица были видны сразу */
+        background-position: center top; 
+        
+        /* Фон под фото (когда пролистаете вниз) будет белым или в цвет темы */
+        background-color: #ffffff; 
+        background-repeat: no-repeat;
     }
 
-    /* Фото пары */
-    .couple-photo {
-        max-width: 100%;
+    /* Уменьшаем отступы секций, чтобы на узком экране было больше места */
+    .invitation, .wishes, .schedule {
+        margin: 10px;
+        padding: 40px 15px;
     }
 
-    /* Цитата */
-    .quote {
-        font-size: 16px;
-        max-width: 90%;
-    }
-
-    /* Фото жениха и невесты */
-    .person img {
-        width: 120px;
-        height: 120px;
+    /* Уменьшаем заголовок, чтобы он не переносился некрасиво */
+    .hero h1 {
+        font-size: 28px;
     }
 }
-
