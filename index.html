@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сергей & Вероника — Свадьба</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ -->
+<header>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+
+    <nav id="menu">
+        <!-- ✏ МЕНЮ — МОЖЕШЬ ДОБАВЛЯТЬ/УДАЛЯТЬ ПУНКТЫ -->
+        <a href="#hero">Главная</a>
+        <a href="#invitation">Приглашение</a>
+        <a href="#wishes">Пожелания</a>
+        <!-- 🗑 МОЖНО УДАЛИТЬ ЛЮБОЙ ПУНКТ -->
+    </nav>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <p class="subtitle">ВМЕСТЕ И НАВСЕГДА</p>
+
+        <!-- ✏ ИМЕНА -->
+        <h1>
+            Сергей <span class="amp">&</span> Вероника
+        </h1>
+
+        <!-- ✏ ДАТА -->
+        <p class="wedding-date">
+            19 сентября 2026 <br>
+            16:00
+        </p>
+
+        <div class="countdown">
+            <div><span id="days">00</span><p>дней</p></div>
+            <div><span id="hours">00</span><p>часов</p></div>
+            <div><span id="minutes">00</span><p>минут</p></div>
+            <div><span id="seconds">00</span><p>секунд</p></div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ПРИГЛАШЕНИЕ -->
+
+<section class="invitation" id="invitation">
+    <div class="container">
+
+        <!-- ✏ ЗАГОЛОВОК -->
+        <h2 class="section-title">Дорогой Гость!</h2>
+
+        <!-- ✏ ТЕКСТ -->
+        <p class="text">
+            Мы рады сообщить Вам, что состоится самое важное
+            торжество в нашей жизни — день нашей свадьбы!
+            Приглашаем Вас разделить с нами этот день.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ПОЖЕЛАНИЯ И ПОДТВЕРЖДЕНИЕ -->
+
+<section class="wishes" id="wishes">
+    <div class="container">
+
+        <!-- ✏ ПОЖЕЛАНИЯ -->
+        <h2 class="section-title">Пожелания по подаркам</h2>
+
+        <p class="text">
+            Ваше присутствие в день нашей свадьбы —
+            самый значимый подарок для нас!
+        </p>
+
+        <!-- 🗑 МОЖНО УДАЛИТЬ ЭТОТ БЛОК -->
+        <h3 class="sub-title">Примечание</h3>
+        <p class="text">
+            Будем благодарны, если Вы воздержитесь
+            от криков "Горько" на празднике.
+        </p>
+
+        <form id="rsvp-form" class="rsvp-form">
+    <input type="text" id="name" placeholder="Ваше имя" required>
+
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="attendance" value="Буду" required>
+            Буду
+        </label>
+
+        <label>
+            <input type="radio" name="attendance" value="Не буду">
+            Не буду
+        </label>
+    </div>
+
+    <textarea id="message" placeholder="Комментарий (необязательно)"></textarea>
+
+    <button type="submit" class="confirm-btn">
+        Отправить
+    </button>
+</form>
+
+<p id="response-message"></p>
+
+    </div>
+</section>
+
+
+<script src="script.js"></script>
+
+<!-- РАСПИСАНИЕ -->
+
+<section class="schedule" id="schedule">
+    <div class="container">
+
+        <h2 class="section-title">Расписание дня</h2>
+
+        <div class="timeline">
+
+            <div class="time-block">
+                <div class="time">14:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">15:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">16:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">17:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">18:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">19:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">20:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">21:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">22:00</div>
+                <div class="event">
+                    (тут ты напишешь свое расписание)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">23:00</div>
+                <div class="event">
+                    Окончание праздничного дня
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- КАРТА -->
+
+<section class="map-section">
+    <div class="container">
+        <h2 class="section-title">Место проведения</h2>
+
+        <div class="map-container">
+            <iframe 
+                src="https://yandex.ru/map-widget/v1/?ll=51.889313%2C55.666352&z=16&oid=199287506021"
+                width="100%" 
+                height="400" 
+                frameborder="0"
+                allowfullscreen="true">
+            </iframe>
+        </div>
+
+        <a href="https://yandex.ru/maps/org/baza_85/199287506021/?ll=51.889313%2C55.666352&z=16"
+           target="_blank"
+           class="map-button">
+            Открыть в Яндекс.Картах
+        </a>
+
+    </div>
+</section>
+</body>
+</html>
