@@ -322,7 +322,7 @@ nav a {
 
     /* Фон страницы — корректный размер без сильного растягивания */
     body {
-        background-size: cover;          /* заполняет экран */
+        background-size: contain;          /* заполняет экран */
         background-position: center top; /* показываем верх фото (лица) */
         background-attachment: scroll;   /* обязательно скроллится */
     }
@@ -344,3 +344,4 @@ nav a {
         height: 120px;
     }
 }
+
