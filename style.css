@@ -315,15 +315,30 @@ nav a {
     font-weight: 500;
 }
 
-/* Адаптив для мобильных */
+/* =========================
+   АДАПТИВ ДЛЯ МОБИЛЬНЫХ
+========================= */
 @media (max-width: 768px) {
+
+    /* Фон страницы — корректный размер без сильного растягивания */
+    body {
+        background-size: cover;          /* заполняет экран */
+        background-position: center top; /* показываем верх фото (лица) */
+        background-attachment: scroll;   /* обязательно скроллится */
+    }
+
+    /* Фото пары */
     .couple-photo {
         max-width: 100%;
     }
+
+    /* Цитата */
     .quote {
         font-size: 16px;
         max-width: 90%;
     }
+
+    /* Фото жениха и невесты */
     .person img {
         width: 120px;
         height: 120px;
