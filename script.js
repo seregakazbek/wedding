@@ -1,52 +1,103 @@
-// Таймер
+/* =========================
+   ТАЙМЕР ДО СВАДЬБЫ
+========================= */
 const weddingDate = new Date("September 19, 2026 16:00:00").getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
+    if (distance < 0) {
+        document.querySelector(".countdown").innerHTML = "День свадьбы настал!";
+        return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
+    // Используем проверку на существование элементов, чтобы не вешать скрипт
+    if(document.getElementById("days")) document.getElementById("days").innerText = days;
+    if(document.getElementById("hours")) document.getElementById("hours").innerText = hours;
+    if(document.getElementById("minutes")) document.getElementById("minutes").innerText = minutes;
+    if(document.getElementById("seconds")) document.getElementById("seconds").innerText = seconds;
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-
-// Бургер-меню
+/* =========================
+   БУРГЕР-МЕНЮ
+========================= */
 function toggleMenu() {
     const menu = document.getElementById("menu");
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    if (menu) {
+        // Если меню открыто — закрываем, если закрыто — открываем
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }
+    }
 }
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbx51pkPv6_Fiflk1MOwm73nzLQcy39ughG1NcRAg1JUN934TY6HUNV6tkz1LB2kz4VQ/exec";
+/* =========================
+   RSVP ФОРМА
+========================= */
+const scriptURL = "https://script.google.com/macros/s/AKfycbxAipTCrJusTCRBML-LhyibtgDE0FPDjsYwSSmYbG0VS7OvAnAwbdcWXfEqpM_cbEOL/exec";
 
-document.getElementById("rsvp-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+const form = document.getElementById("rsvp-form");
+const toggleBtn = document.getElementById("toggleForm");
+const container = document.getElementById("rsvpContainer");
+const responseMessage = document.getElementById("response-message");
 
-    const data = {
-        name: document.getElementById("name").value,
-        attendance: document.querySelector('input[name="attendance"]:checked').value,
-        message: document.getElementById("message").value
-    };
-
-    fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("response-message").innerText = "Спасибо за ответ!";
-        document.getElementById("rsvp-form").reset();
-    })
-    .catch(error => {
-        document.getElementById("response-message").innerText = "Ошибка отправки.";
+// КНОПКА ОТКРЫТИЯ
+if (toggleBtn && container) {
+    toggleBtn.addEventListener("click", function() {
+        container.classList.toggle("show");
+        toggleBtn.innerText = container.classList.contains("show") ? "Скрыть форму" : "Подтвердить!";
     });
-});
+}
+
+// ОТПРАВКА ФОРМЫ
+if (form) {
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const btn = form.querySelector('.send-btn');
+        const originalText = btn.innerText;
+        btn.innerText = "Отправляем...";
+        btn.disabled = true;
+
+        const formData = new FormData();
+        formData.append("Имя", document.getElementById("mainName").value);
+        formData.append("Количество", document.getElementById("totalCount").value);
+        formData.append("Имена_гостей", document.getElementById("guestsNames").value);
+        formData.append("Алкоголь", document.querySelector('input[name="alcohol"]:checked').value);
+        formData.append("Присутствие", document.querySelector('input[name="attendance"]:checked').value);
+        formData.append("Комментарий", document.getElementById("message").value);
+        formData.append("Дата_заявки", new Date().toLocaleString());
+
+        fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+        .then(() => {
+            responseMessage.innerText = "Спасибо! Ответ успешно отправлен.";
+            responseMessage.style.color = "green";
+            form.reset();
+            btn.innerText = "Отправлено!";
+            setTimeout(() => {
+                container.classList.remove("show");
+                btn.innerText = originalText;
+                btn.disabled = false;
+                toggleBtn.innerText = "Подтвердить!";
+            }, 3000);
+        })
+        .catch(error => {
+            console.error('Ошибка!', error);
+            responseMessage.innerText = "Ошибка отправки. Попробуйте еще раз.";
+            responseMessage.style.color = "red";
+            btn.disabled = false;
+            btn.innerText = originalText;
+        });
+    });
+}
