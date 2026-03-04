@@ -397,4 +397,29 @@ nav a {
     .event {
         text-align: center;
     }
+    /* Настройка карты для телефона */
+    .map-section {
+        padding: 40px 15px; /* Уменьшаем огромные отступы */
+    }
+
+    .map-container {
+        height: 300px; /* Делаем карту чуть ниже, чтобы она не была огромной */
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .map-container iframe {
+        height: 300px; /* Высота самого окна карты */
+    }
+
+    /* Настройка кнопки под картой */
+    .map-button {
+        display: block; /* Делаем блочной, чтобы центрировать */
+        width: 90%;     /* Почти на всю ширину экрана для удобства */
+        margin: 20px auto 0; /* Центрируем и добавляем отступ сверху */
+        padding: 14px;
+        font-size: 15px;
+        text-align: center;
+    }
+
 }
