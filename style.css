@@ -353,8 +353,18 @@ nav a {
 
 @media (max-width: 768px) {
 
+    body {
+        /* Указываем путь к мобильному фото */
+        background-image: url("images/mobile-bg.jpg") !important; 
+        background-size: cover !important; /* Чтобы заполнило весь экран */
+        background-position: center top !important;
+        background-attachment: scroll !important;
+        background-repeat: no-repeat !important;
+    }
+
     .hero {
         padding: 140px 20px 60px;
+        min-height: 100vh; /* Чтобы первый экран занимал всё место */
     }
 
     .hero h1 {
@@ -365,16 +375,18 @@ nav a {
     .countdown {
         padding: 15px 10px;
         gap: 10px;
-        width: 95%; /* Чтобы не упирался в края экрана */
+        width: 95%; 
         border-radius: 15px;
+        background: rgba(255, 255, 255, 0.05); /* Легкая подложка для читаемости */
+        backdrop-filter: blur(5px);
     }
 
     .countdown span {
-        font-size: 20px; /* Цифры чуть меньше */
+        font-size: 20px; 
     }
 
     .countdown p {
-        font-size: 12px; /* Подписи чуть меньше */
+        font-size: 12px; 
     }
 
     .time-block {
@@ -384,11 +396,5 @@ nav a {
 
     .event {
         text-align: center;
-    }
-
-    body {
-        background-size: contain;
-        background-position: center top;
-        background-attachment: scroll;
     }
 }
