@@ -330,21 +330,32 @@ nav a {
     padding: 80px 20px;
 }
 
+.map-wrapper {
+    max-width: 800px; /* Ограничиваем ширину на ПК, чтобы не была на весь экран */
+    margin: 0 auto;   /* Центрируем всю конструкцию */
+    text-align: center;
+}
+
 .map-container {
     margin-top: 30px;
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 .map-button {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 30px;
+    margin-top: 25px; /* Отступ от карты до кнопки */
+    padding: 14px 35px;
     background: #5f7c5f;
     color: white;
     text-decoration: none;
     border-radius: 30px;
+    font-weight: 500;
+    transition: transform 0.2s ease;
 }
+
 
 
 /* =========================
