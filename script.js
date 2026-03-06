@@ -8,7 +8,7 @@ function updateCountdown() {
     const distance = weddingDate - now;
 
     if (distance < 0) {
-        document.querySelector(".countdown").innerHTML = "День свадьбы настал!";
+        if(document.querySelector(".countdown")) document.querySelector(".countdown").innerHTML = "День свадьбы настал!";
         return;
     }
 
@@ -17,7 +17,6 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Используем проверку на существование элементов, чтобы не вешать скрипт
     if(document.getElementById("days")) document.getElementById("days").innerText = days;
     if(document.getElementById("hours")) document.getElementById("hours").innerText = hours;
     if(document.getElementById("minutes")) document.getElementById("minutes").innerText = minutes;
@@ -33,12 +32,7 @@ updateCountdown();
 function toggleMenu() {
     const menu = document.getElementById("menu");
     if (menu) {
-        // Если меню открыто — закрываем, если закрыто — открываем
-        if (menu.style.display === "flex") {
-            menu.style.display = "none";
-        } else {
-            menu.style.display = "flex";
-        }
+        menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
     }
 }
 
@@ -52,7 +46,6 @@ const toggleBtn = document.getElementById("toggleForm");
 const container = document.getElementById("rsvpContainer");
 const responseMessage = document.getElementById("response-message");
 
-// КНОПКА ОТКРЫТИЯ
 if (toggleBtn && container) {
     toggleBtn.addEventListener("click", function() {
         container.classList.toggle("show");
@@ -60,11 +53,9 @@ if (toggleBtn && container) {
     });
 }
 
-// ОТПРАВКА ФОРМЫ
 if (form) {
     form.addEventListener("submit", function(e) {
         e.preventDefault();
-        
         const btn = form.querySelector('.send-btn');
         const originalText = btn.innerText;
         btn.innerText = "Отправляем...";
@@ -101,3 +92,20 @@ if (form) {
         });
     });
 }
+
+/* =========================
+   АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ
+========================= */
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.invitation, .wishes, .schedule, .map-section, .couple-photo').forEach(section => {
+    section.classList.add('hidden-up');
+    observer.observe(section);
+});
