@@ -42,6 +42,7 @@ header {
     left: 0;
     padding: 15px 20px;
     z-index: 1000;
+background: transparent !important;
 }
 
 .burger {
@@ -50,20 +51,31 @@ header {
 }
 
 nav {
-    display: none;
+    display: none; /* Оставляем как есть, управляется через JS */
     flex-direction: column;
     margin-top: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    border-radius: 10px;
+    
+    /* МАГИЯ СЖАТИЯ */
+    width: max-content;   /* Фон будет ровно по ширине текста */
+    min-width: 180px;     /* Но не меньше этого значения */
+    padding: 20px;        /* Внутренние отступы */
+    
+    /* СТИЛЬ */
+    background: rgba(255, 255, 255, 0.95); /* Белый с легкой прозрачностью */
+    backdrop-filter: blur(10px);           /* Эффект стекла */
+    border-radius: 20px;                   /* Красивое скругление */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Мягкая тень */
 }
 
 nav a {
     text-decoration: none;
     color: #333;
-    margin: 8px 0;
-    font-weight: 400;
-    letter-spacing: 1px;
+    margin: 10px 0;
+    font-family: 'Tenor Sans', sans-serif; /* Наш новый шрифт */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-style: italic;
 }
 
 /* =========================
@@ -259,13 +271,143 @@ nav a {
     opacity: 1 !important;
 }
 
-.rsvp-form input, .rsvp-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+/* ========================================
+   ПРЕМИУМ ДИЗАЙН ФОРМЫ (RSVP)
+=========================================== */
+
+/* 1. Заголовки полей (Имя, Количество и т.д.) */
+.rsvp-form p {
+    font-family: 'Cinzel', serif !important;
+    font-size: 15px !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #000000; /* Глубокий оливковый */
+    margin: 20px 0 10px;
+    text-align: center;
+    font-style: italic
+}
+
+/* 2. Поля ввода (Инпуты и Текстовые области) */
+.rsvp-form input,
+.rsvp-form input[type="number"],
+.rsvp-form textarea {
+    background-color: #f1f0e8 !important; /* Твой бежевый цвет */
+    border: 1px solid rgba(0, 0, 0, 0.05) !important; /* Почти невидимая рамка */
+    padding: 10px 15px !important; /* Уменьшили высоту полей */
+    border-radius: 12px !important;
     font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    color: #333;
+    width: 100%;
+    outline: none;
+    box-shadow: none !important; /* Убираем лишние тени */
+    min-height: 45px !important; /* Делаем их тонкими, как обычная строка */
+    height: 45px !important;
+    resize: none; /* Запрещаем гостям растягивать их */
+    overflow: hidden;
+}
+
+/* Эффект при клике на поле */
+.rsvp-form input:focus,
+.rsvp-form textarea:focus {
+    background: #ffffff;
+    border-color: #8b947a !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(95, 124, 95, 0.1);
+}
+
+/* 3. СТИЛЬНЫЕ РАДИОКНОПКИ (Да/Нет, Буду/Не буду) */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0 25px;
+}
+
+.radio-group label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    transition: color 0.3s;
+}
+
+/* Скрываем стандартную страшную точку */
+.radio-group input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #8b947a; /* Оливковый ободок */
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+}
+
+/* Вид кнопки, когда она выбрана */
+.radio-group input[type="radio"]:checked {
+    background-color: #8b947a;
+    border-color: #8b947a;
+    box-shadow: 0 0 8px rgba(139, 148, 122, 0.4);
+}
+
+/* Маленькая точка внутри при выборе */
+.radio-group input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+}
+#totalCount {
+    width: 70px !important;    /* Делаем его маленьким */
+    margin: 10px auto !important; /* Центрируем по горизонтали */
+    display: block !important;
+    text-align: center;          /* Цифра будет ровно посередине */
+    padding: 12px 5px 12px 15px !important; /* Немного места для стрелочек справа */
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 12px;
+}
+    #totalCount::-webkit-inner-spin-button, 
+    #totalCount::-webkit-outer-spin-button { 
+    opacity: 1; /* Делаем стрелочки заметными */
+    cursor: pointer;
+}
+
+/* 4. КНОПКА ОТПРАВИТЬ */
+.send-btn {
+    display: block;
+    width: 200px;
+    margin: 30px auto 0;
+    padding: 15px;
+    background: #5f7c5f;
+    color: #000000 !important; /* Твой бежевый цвет текста */
+    font-family: 'Cinzel', serif !important;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(95, 124, 95, 0.2);
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    background: #4a5043;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(95, 124, 95, 0.3);
 }
 
 .send-btn {
