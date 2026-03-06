@@ -1,646 +1,184 @@
-@import url('https://fonts.googleapis.com');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Manrope', sans-serif;
-    color: #2d2d2d;
-    background-image: url("images/bg.jpg"); 
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Эффекты появления при скролле */
-.hidden-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* =========================
-   МЕНЮ
-========================= */
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    padding: 15px 20px;
-    z-index: 1000;
-background: transparent !important;
-}
-
-.burger {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-nav {
-    display: none; /* Оставляем как есть, управляется через JS */
-    flex-direction: column;
-    margin-top: 10px;
-    
-    /* МАГИЯ СЖАТИЯ */
-    width: max-content;   /* Фон будет ровно по ширине текста */
-    min-width: 180px;     /* Но не меньше этого значения */
-    padding: 20px;        /* Внутренние отступы */
-    
-    /* СТИЛЬ */
-    background: rgba(255, 255, 255, 0.95); /* Белый с легкой прозрачностью */
-    backdrop-filter: blur(10px);           /* Эффект стекла */
-    border-radius: 20px;                   /* Красивое скругление */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Мягкая тень */
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    margin: 10px 0;
-    font-family: 'Tenor Sans', sans-serif; /* Наш новый шрифт */
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-style: italic;
-}
-
-/* =========================
-   HERO
-========================= */
-.hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 20px 60px;
-    overflow: hidden;
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent, white);
-    z-index: 1;
-}
-
-.hero h1 {
-    font-family: 'Playfair Display', serif; /* Твой актуальный шрифт */
-    font-size: 42px;
-    letter-spacing: 3px;
-    font-style: italic;
-    position: relative;
-    z-index: 2; /* Чтобы буквы были ПОВЕРХ градиента */
-}
-
-.subtitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-    font-style: italic;
-}
-
-.wedding-date {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-    font-style: italic;
-}
-
-/* ТАЙМЕР (СТЕКЛО) */
-.countdown {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-    font-style: italic;
-    margin-top: 30px;
-    display: inline-flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px 30px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.01); 
-    backdrop-filter: blur(10px);         
-    -webkit-backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: none; 
-}
-
-.countdown span {
-    font-size: 32px;
-    font-weight: 300;
-}
-
-/* =========================
-   СЕКЦИИ (ОБНОВЛЕННЫЙ ТЕКСТ)
-========================= */
-.invitation, .wishes, .schedule {
-    padding: 80px 20px;
-    max-width: 800px;
-    margin: 60px auto;
-    width: 90%;
-    border-radius: 40px;
-    background: rgba(255, 255, 255, 0.01) !important; 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background-image: none !important;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    font-style: italic; /* Трендовый наклон */
-}
-
-.sub-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-    font-style: italic; /* Трендовый наклон */
-}
-.text {
-    font-family: 'Cinzel', serif !important;
-    font-size: 17px !important; 
-    letter-spacing: 4px !important; /* Тот самый "элитный" воздух */
-    text-transform: uppercase !important; 
-    line-height: 2.2 !important;
-    color: #1a1a1a !important;
-    text-align: center;
-    font-weight: 400 !important;
-    display: block;
-    font-style: italic
-}
-.details {
-    font-family: 'Cinzel', serif !important;
-    font-size: 20px !important; 
-    letter-spacing: 4px !important; /* Тот самый "элитный" воздух */
-    text-transform: uppercase !important; 
-    line-height: 2.2 !important;
-    color: #1a1a1a !important;
-    text-align: center;
-    font-weight: 400 !important;
-    display: block;
-    font-style: italic
-}
-
-
-/* ФОТО И ЦИТАТА */
-.couple-photo {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-    margin: 30px auto;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-}
-
-.quote {
-    font-family: 'Cinzel', serif !important;
-    font-size: 16px !important; 
-    letter-spacing: 6px !important;
-    text-transform: uppercase;
-    margin: 40px auto !important;
-    color: #000000 !important;
-}
-
-/* =========================
-   ФОРМА И КНОПКИ
-========================= */
-.confirm-toggle {
-
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: #5f7c5f;
-    color: #f1f0e8 !important;
-    font-family: 'Cinzel', serif !important;
-    border: none;
-    border-radius: 50px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 5px 15px rgba(95, 124, 95, 0.3); /* Мягкая тень */
-}
-
-.confirm-toggle:hover {
-    background: #4a634a;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(95, 124, 95, 0.4);
-}
-
-.rsvp-hidden {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.8s ease, opacity 0.5s ease;
-}
-
-#rsvpContainer.show {
-    max-height: 1500px !important;
-    opacity: 1 !important;
-}
-
-/* ========================================
-   ПРЕМИУМ ДИЗАЙН ФОРМЫ (RSVP)
-=========================================== */
-
-/* 1. Заголовки полей (Имя, Количество и т.д.) */
-.rsvp-form p {
-    font-family: 'Cinzel', serif !important;
-    font-size: 15px !important;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #000000; /* Глубокий оливковый */
-    margin: 20px 0 10px;
-    text-align: center;
-    font-style: italic
-}
-
-/* 2. Поля ввода (Инпуты и Текстовые области) */
-.rsvp-form input,
-.rsvp-form input[type="number"],
-.rsvp-form textarea {
-    background-color: #f1f0e8 !important; /* Твой бежевый цвет */
-    border: 1px solid rgba(0, 0, 0, 0.05) !important; /* Почти невидимая рамка */
-    padding: 10px 15px !important; /* Уменьшили высоту полей */
-    border-radius: 12px !important;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    color: #333;
-    width: 100%;
-    outline: none;
-    box-shadow: none !important; /* Убираем лишние тени */
-    min-height: 45px !important; /* Делаем их тонкими, как обычная строка */
-    height: 45px !important;
-    resize: none; /* Запрещаем гостям растягивать их */
-    overflow: hidden;
-}
-
-/* Эффект при клике на поле */
-.rsvp-form input:focus,
-.rsvp-form textarea:focus {
-    background: #ffffff;
-    border-color: #8b947a !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 0 10px rgba(95, 124, 95, 0.1);
-}
-
-/* 3. СТИЛЬНЫЕ РАДИОКНОПКИ (Да/Нет, Буду/Не буду) */
-.radio-group {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 15px 0 25px;
-}
-
-.radio-group label {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #555;
-    transition: color 0.3s;
-}
-
-/* Скрываем стандартную страшную точку */
-.radio-group input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #8b947a; /* Оливковый ободок */
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s;
-}
-
-/* Вид кнопки, когда она выбрана */
-.radio-group input[type="radio"]:checked {
-    background-color: #8b947a;
-    border-color: #8b947a;
-    box-shadow: 0 0 8px rgba(139, 148, 122, 0.4);
-}
-
-/* Маленькая точка внутри при выборе */
-.radio-group input[type="radio"]:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-}
-#totalCount {
-    width: 70px !important;    /* Делаем его маленьким */
-    margin: 10px auto !important; /* Центрируем по горизонтали */
-    display: block !important;
-    text-align: center;          /* Цифра будет ровно посередине */
-    padding: 12px 5px 12px 15px !important; /* Немного места для стрелочек справа */
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    border-radius: 12px;
-}
-    #totalCount::-webkit-inner-spin-button, 
-    #totalCount::-webkit-outer-spin-button { 
-    opacity: 1; /* Делаем стрелочки заметными */
-    cursor: pointer;
-}
-
-/* 4. КНОПКА ОТПРАВИТЬ */
-.send-btn {
-    display: block;
-    width: 200px;
-    margin: 30px auto 0;
-    padding: 15px;
-    background: #5f7c5f;
-    color: #000000 !important; /* Твой бежевый цвет текста */
-    font-family: 'Cinzel', serif !important;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-size: 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(95, 124, 95, 0.2);
-    transition: all 0.3s ease;
-}
-
-.send-btn:hover {
-    background: #4a5043;
-    transform: translateY(-3px);
-    box-shadow: 0 15px 25px rgba(95, 124, 95, 0.3);
-}
-
-.send-btn {
-    padding: 10px 25px;
-    background: #5f7c5f;
-    color: #f1f0e8 !important; /* Тот же бежевый */
-    font-family: 'Cinzel', serif !important;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-}
-
-/* =========================
-   РАСПИСАНИЕ (СТИЛЬНЫЕ ЛИНИИ)
-========================= */
-.time-block {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Тонкая линия */
-    align-items: center;
-}
-
-.time-block:last-child {
-    border-bottom: none; /* Убираем линию у последнего пункта */
-}
-
-.time {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: 18px;
-    color: #000000;
-    min-width: 60px;
-}
-
-.event {
-    font-family: 'Cinzel', serif !important;
-    font-size: 14px !important; 
-    letter-spacing: 5px !important;
-    text-transform: uppercase;
-    color: #000000 !important; /* этот блок это именно слова в скобках */
-    opacity: 0.9;
-}
-
-/* =========================
-   КАРТА
-========================= */
-.map-section {
-    padding: 80px 20px;
-}
-
-.map-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.map-container {
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-.map-button {
-    display: inline-block !important;
-    margin-top: 30px !important;
-    padding: 14px 45px !important;
-    background-color: #5f7c5f !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    border-radius: 50px !important;
-    transition: 0.3s !important;
-    cursor: pointer !important;
-}
-
-/* ========================================
-   МЕСТО ПРОВЕДЕНИЯ (ЧИСТЫЙ СТЫК)
-=========================================== */
-
-.location-card {
-    /* 1. Делаем симметричные углы со всех сторон */
-    border-radius: 60px !important; 
-    
-    /* 2. Стеклянный эффект */
-    background: rgba(255, 255, 255, 0.4) !important; 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
-
-    padding: 60px 30px 60px; /* Увеличили нижний отступ для кнопки */
-    position: relative;
-    z-index: 10;
-    
-    /* УБИРАЕМ НАПЛЫВ: ставим margin-bottom в 0 */
-    margin: 40px auto 0; 
-    
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-}
-/* Добавь это сразу после .location-card */
-.location-address {
-    font-family: 'Cinzel', serif !important;
-    letter-spacing: 7px !important;
-    text-transform: uppercase !important;
-    font-size: 15px !important;
-    color: #000000 !important;
-}
-
-/* 3. Кнопка-мост (стоит ровно на линии стыка) */
-.round-button {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 115px;
-    height: 115px;
-    background: #5f7c5f;
-    color: #f1f0e8 !important;
-    border-radius: 50%;
-    
-    
-    /* МАГИЯ СТЫКА: выносим кнопку за пределы карточки ровно наполовину */
-    margin: 0 auto -125px !important; 
-    font-family: 'Cinzel', serif !important;
-    color: #f1f0e8 !important;
-    position: relative;
-    z-index: 20;
-    text-decoration: none !important;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    box-shadow: 0 10px 30px rgba(139, 148, 122, 0.3);
-    transition: all 0.3s ease;
-    font-style: italic
-}
-
-/* 4. Фото (прижимается встык к карточке) */
-.location-image {
-    width: 100%;
-    height: 450px; 
-    overflow: hidden;
-    border-radius: 60px; /* Углы такие же, как у карточки */
-    position: relative;
-    z-index: 1;
-    margin-top: 0 !important; /* Убираем любые зазоры */
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-}
-
-/* 4. ИСПРАВЛЕНИЕ РАСТЯНУТОГО ФОТО VENUE.JPG */
-.location-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Сохраняет пропорции, фото больше не "мыло" */
-    object-position: center;
-    display: block;
-    transition: transform 0.8s ease;
-}
-
-/* Эффект при наведении на фото */
-.location-image:hover img {
-    transform: scale(1.05); /* Легкое увеличение фото внутри рамки */
-}
-.hidden-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
-}
-.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* =========================
-   АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНА
-========================= */
-@media (max-width: 768px) {
-    body { background: white !important; }
-    
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-image: url("images/mobile-bg.jpg") !important;
-        background-size: cover !important;
-        background-position: center top !important;
-        background-repeat: no-repeat !important;
-        z-index: -1;
-    }
-
-    .hero h1 { font-size: 36px; }
-
-    .invitation, .wishes, .schedule {
-        padding: 40px 20px;
-        margin: 20px auto;
-    }
-
-    .countdown {
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .countdown span { font-size: 24px; }
-
-    .map-container { height: 300px; }
-    .map-container iframe { height: 300px; }
-    
-    .map-button {
-        display: block !important;
-        width: 100% !important;
-        margin: 20px 0 !important;
-    }
-
-    /* Адаптация новой карточки места для телефона */
-    .location-card {
-        padding: 40px 15px 30px;
-        border-radius: 0 0 60px 60px; /* Чуть меньше скругление для узкого экрана */
-    }
-
-    .round-button {
-        width: 110px;  /* Уменьшаем круг на мобилке */
-        height: 110px;
-        font-size: 12px;
-        margin: 20px auto -55px; /* Корректируем наезд на фото */
-    }
-
-    .location-image {
-        height: 250px; /* Чтобы фото не занимало весь экран телефона */
-    }
-
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сергей & Вероника — Свадьба</title>
+
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=200">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ -->
+<header>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+    <nav id="menu">
+    <a href="#hero" onclick="toggleMenu()">Главная</a>
+    <a href="#invitation" onclick="toggleMenu()">Приглашение</a>
+    <a href="#wishes" onclick="toggleMenu()">Пожелания</a>
+    <!-- Добавляем этот пункт -->
+    <a href="#map-section" onclick="toggleMenu()">Место проведения</a> 
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <p class="subtitle">ВМЕСТЕ И НАВСЕГДА</p>
+        <h1>Сергей <span class="amp">&</span> Вероника</h1>
+        <p class="wedding-date">19 сентября 2026 <br> 16:00</p>
+	<div class="timer-card">
+        <div class="countdown">
+            <div><span id="days">00</span><p>дней</p></div>
+            <div><span id="hours">00</span><p>часов</p></div>
+            <div><span id="minutes">00</span><p>минут</p></div>
+            <div><span id="seconds">00</span><p>секунд</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ПРИГЛАШЕНИЕ -->
+<section class="invitation" id="invitation">
+    <div class="container">
+
+        <h2 class="section-title">Дорогой Гость!</h2>
+
+        <p class="text">
+            Мы рады сообщить Вам, что 19.09.2026 состоится самое важное
+            торжество в нашей жизни — день нашей свадьбы!
+            Приглашаем Вас разделить с нами радость этого незабываемого дня.
+        </p>
+
+        <p class="details">
+            19.09.2026 в 16:00 <br>
+        </p>
+
+        <img src="images/couple.jpg" class="couple-photo" alt="Пара">
+
+        <p class="quote">
+            Там, где поселилась любовь, растёт радость!
+        </p>
+    </div>
+</section>
+
+<!-- ПОЖЕЛАНИЯ И ПОДТВЕРЖДЕНИЕ -->
+<section class="wishes" id="wishes">
+    <div class="container">
+
+        <h2 class="section-title">Пожелания по подаркам</h2>
+
+        <p class="text">
+            Ваше присутствие в день нашей свадьбы —
+            самый значимый подарок для нас!
+        </p>
+
+        <h3 class="sub-title">Примечание</h3>
+
+        <p class="text">
+            Будем благодарны, если Вы воздержитесь
+            от криков "Горько" на празднике.
+        </p>
+
+        <!-- КНОПКА -->
+        <button id="toggleForm" class="confirm-toggle">
+            Подтвердить!
+        </button>
+
+        <!-- ВЫЕЗЖАЮЩАЯ ФОРМА -->
+        <div id="rsvpContainer" class="rsvp-hidden">
+
+            <form id="rsvp-form" class="rsvp-form">
+
+    <p>Ваше имя и фамилия</p>
+    <input type="text" id="mainName" required>
+
+    <p>Сколько человек будет с вами</p>
+    <input type="number" id="totalCount" min="0" value="0" placeholder= required>
+
+    <p>Имена гостей (через запятую)</p>
+    <textarea id="guestsNames" placeholder=></textarea>
+
+    <div class="radio-group">
+        <p>Будете употреблять алкоголь?</p>
+        <label>
+            <input type="radio" name="alcohol" value="Да" required>
+            Да
+        </label>
+        <label>
+            <input type="radio" name="alcohol" value="Нет">
+            Нет
+        </label>
+    </div>
+
+    <div class="radio-group">
+        <p>Вы будете присутствовать?</p>
+        <label>
+            <input type="radio" name="attendance" value="Буду" required>
+            Буду
+        </label>
+        <label>
+            <input type="radio" name="attendance" value="Не буду">
+            Не буду
+        </label>
+    </div>
+
+    <p>Комментарий (необязательно)</p>
+    <textarea id="message" placeholder=></textarea>
+
+    <button type="submit" class="send-btn">Отправить</button>
+
+</form>
+
+            <p id="response-message"></p>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- РАСПИСАНИЕ -->
+<section class="schedule" id="schedule">
+    <div class="container">
+        <h2 class="section-title">Расписание дня</h2>
+        <div class="timeline">
+
+            <div class="time-block"><div class="time">16:00</div><div class="event">(Сборы,Фуршет)</div></div>
+            <div class="time-block"><div class="time">16:30</div><div class="event">(Выездная церемония)</div></div>
+            <div class="time-block"><div class="time">17:00</div><div class="event">(Банкет)</div></div>
+            <div class="time-block"><div class="time">23:00</div><div class="event">(Завершение вечера)</div></div>
+
+        </div>
+    </div>
+</section>
+
+<!-- КАРТА -->
+<section class="map-section" id="map-section">
+    <div class="container">
+        <!-- Фигурная подложка (как на фото) -->
+        <div class="location-card"> 
+            <h2 class="section-title">Место проведения</h2>
+            
+            <p class="location-address">
+                База 85,<br>
+                Береговая ул., 185
+            </p>
+
+            <a href="https://yandex.com/maps/-/CPuJE-p1" 
+		target="_blank" 
+		class="round-button">
+                Построить<br>маршрут
+            </a>
+        </div>
+
+        <!-- Фото заведения под карточкой -->
+        <div class="location-image">
+            <img src="images/venue.jpg" alt="Видная Усадьба">
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
